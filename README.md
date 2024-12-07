@@ -4,7 +4,7 @@ Happy Holidays!
 
 MKFactor and Klipper are proud to announce the 2024 holiday badge! 
 
-Assembly Instructions:
+## Assembly Instructions:
 
 Place the ESP32 module in the headers to keep them straight:
 ![IMG_0241](https://github.com/user-attachments/assets/18bfba40-6f04-400e-b17f-5bee3ec91e24)
@@ -42,17 +42,23 @@ Place the minibadge headers on the front of the badge (the chimney)
 Putting a minibadge in the headers can help keep things straight. Flip the badge over and solder the pins:
 ![IMG_0259](https://github.com/user-attachments/assets/35809132-2e76-473e-815d-e04aa684be26)
 
-That's all there is to it! Fire up the badge and look for the wled-ap access point and the password is wled1234. Once you are connected, scan for your local wifi and join the badge to it. You can then update the code with the attached file by browsing to the settings.
+That's all there is to it! At this point, the LEDs will not turn on and the left screen will be flashing. This is normal! The following steps will take you through the process of updating the firmware to get everything working!
 
+## Firmware Update:
 
+You'll need to download the firmware.bin and wled_presets.json files from this repository for the following steps.
 
+Fire up the badge and look for the wled-ap access point and connect to it. The password is wled1234. It should present a captive portal that takes you to the configuration page. Once you are connected, go to the wifi settings and scan for your local wifi and join the badge to it. You can set a static IP if you'd like. If not, make note of the mDNS address or lookup the new IP lease in your dhcp server. 
 
+Now browse to the IP or url of your badge. At the top of the web interface, click on "Config". Now click on "Security & Updates". Click the "Manual OTA Update" button. Click "Choose File" and select the firmware.bin file from this repository. Now click "Update". The badge will upload the new firmware and reboot. You may need to manually power cycle the badge after it finishes the firmware update. If at any point throughout this process you can't access the web interface or things seem to be acting weird, power cycling the badge usually fixes things.
 
+With the new firmware, the right screen should show an image. However, there are still a couple other settings to change. Go back to the web interface and click on "Config". Now click on "Security & Updates". Scroll down to the "Backup & Restore" section and click "Choose File" under "Restore presets". Select the wled_presets.json file from this repository. Now click "Upload". Then click "Back" and click on "LED Preferences". Under "Hardware setup" change the Color Order to RGB, Length to 25, and GPIO to 17. It should look like this:
+![LEDSettings](https://github.com/user-attachments/assets/991e8caf-8c3d-4237-a01b-50fe8f57ec6c) 
 
+Then click "Save" at the top of the page. 
 
+At this point at least one LED should be on and both screens should be on. The badge is programmed to automatically change the preset each day to light up another LED, all the way up to the 25th!
 
+If you run into any issues or have questions, please let us know!
 
-
-
-
-
+If you're interested in playing with the code and changing things, the source is available here: https://github.com/compukidmike/WLED-BCTDWDFK
